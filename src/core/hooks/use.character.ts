@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { AllCharacters } from "../models/character";
+import { AllCharacters } from "../components/models/character";
 import { ApiRepository } from "../services/api.repository";
 import { consoleError } from "../services/errros";
 

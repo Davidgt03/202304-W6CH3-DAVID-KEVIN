@@ -34,7 +34,7 @@
       "name": "Tyrion",
       "lastname": "Lannister",
       "age": 31,
-      "alive": true,
+      "alive": false,
       "warcry": "I think I will die soon",
       "supports": 3
     },
@@ -43,7 +43,7 @@
       "name": "Broon",
       "lastname": "Unknown",
       "age": 45,
-      "alive": true,
+      "alive": false,
       "pelotismo": 0,
       "warcry": "I am based",
       "supports": 2
