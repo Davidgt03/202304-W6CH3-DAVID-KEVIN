@@ -12,4 +12,4 @@ Reproduce el challenge Week 3 - Challenge 1
 - Utiliza la maqueta original (HTML/CSS) o los componentes que creaste
   para realizar los componentes de React necesarios para que funcione la aplicación
 
-- Testea todos los elementos
+- Testea todos los elementoss
