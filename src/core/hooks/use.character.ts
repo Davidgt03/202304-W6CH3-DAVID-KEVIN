@@ -1,44 +1,37 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { AllCharacters } from "../components/models/character";
+import { useCallback, useEffect, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Character } from "../components/models/character";
 import { ApiRepository } from "../services/api.repository";
-import { consoleError } from "../services/errros";
+import { AppDispatch, RootState } from "../store/store";
+import * as ac from "../redux/reducer";
+import { consoleError } from "../../core/services/error";
 
-export function useCharacters() {
-  const [characters, setCharacters] = useState<AllCharacters[]>([]);
-  const characterUrl = "http://localhost:3000/characters/";
+export function useCharacter() {
+  const { characters } = useSelector((state: RootState) => state.character);
+  const dispatch: AppDispatch = useDispatch();
 
-  const repo: ApiRepository<AllCharacters> = useMemo(
-    () => new ApiRepository<AllCharacters>(characterUrl),
+  const characterUrl = "http://localhost:3000/characters";
+
+  const repo: ApiRepository<Character> = useMemo(
+    () => new ApiRepository<Character>(characterUrl),
     []
   );
 
   const handleLoad = useCallback(async () => {
-    const loadedCharacter = await repo.getAll();
-    setCharacters(loadedCharacter);
-  }, [repo]);
-
-  useEffect(() => {
-    handleLoad();
-  }, [handleLoad]);
-
-  const handleKill = async (character: AllCharacters) => {
     try {
-      const updatedCharacter = await repo.update(character.id, {
-        ...character,
-        alive: false,
-      });
-      setCharacters(
-        characters.map((item) =>
-          item.id === character.id ? updatedCharacter : item
-        )
-      );
+      const loadedCharacter = await repo.getAll();
+      dispatch(ac.load(loadedCharacter));
     } catch (error) {
       consoleError(error);
     }
-  };
+  }, [repo, dispatch]);
+
+  useEffect(() => {
+    handleLoad();
+  });
 
   return {
     characters,
-    handleKill,
+    handleLoad,
   };
 }

@@ -1,38 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
-export type GotState = {
-  textKey: string;
-  isCalling: boolean;
-  isHangUp: boolean;
+import { Character } from "../components/models/character";
+
+export type charactersState = {
+  characters: Character[];
 };
 
-const initialState: GotState = {
-  textKey: "",
-  isCalling: false,
-  isHangUp: true,
+const initialState: charactersState = {
+  characters: [],
 };
 
-const slicePhone = createSlice({
-  name: "Got",
+const slicecharacters = createSlice({
+  name: "characters",
   initialState,
   reducers: {
-    add: (state, { payload }) => ({
+    load: (state, { payload }) => ({
       ...state,
-      textKey: state.textKey + payload,
-    }),
-    erase: (state) => ({
-      ...state,
-      phoneNumber: state.textKey.substring(0, state.textKey.length - 1),
-    }),
-    hang: (state) => ({
-      ...state,
-      iscalling: !state.isCalling,
-    }),
-    call: (state) => ({
-      ...state,
-      iscalling: !state.isCalling,
+      characters: payload,
     }),
   },
 });
 
-export const { add, erase, hang, call } = slicePhone.actions;
-export default slicePhone.reducer;
+export const { load } = slicecharacters.actions;
+export default slicecharacters.reducer;
