@@ -4,7 +4,7 @@ import {
   Kingshand,
   Squire,
   Swordsman,
-} from "../models/character";
+} from "./models/character";
 
 type PropsType = {
   item: AllCharacters;
